@@ -1,4 +1,5 @@
-﻿using Project.Domain.Services;
+﻿using Project.Domain.Interface;
+using Project.Domain.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,14 +14,17 @@ namespace Project.UI
 {
     public partial class Form1 : Form
     {
-        public Form1()
+        private readonly IClienteServices _clienteServices;
+
+        public Form1(IClienteServices clienteServices)
         {
             InitializeComponent();
+            _clienteServices = clienteServices;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var cliente = ClienteServices.Instance().GetCliente(new Guid());
+            var cliente = _clienteServices.GetCliente(new Guid());
             txtNome.Text = cliente.Nome;
             txtCPF.Text = cliente.CPF;
             txtDtNasc.Text = cliente.DataNascimento.ToString("dd/MM/yyyy");
@@ -37,7 +41,7 @@ namespace Project.UI
 
         private void button3_Click(object sender, EventArgs e)
         {
-            var lstClientes = ClienteServices.Instance().GetClientes();
+            var lstClientes = _clienteServices.GetClientes();
             foreach (var item in lstClientes)
             {
                 listView1.Items.Add(item.Nome);

@@ -1,12 +1,12 @@
-﻿using Project.Core.Base;
-using Project.Core.Enum;
+﻿using Project.Core.Enum;
 using Project.Core.Model;
+using Project.Infra.Data.Interface;
 using System;
 using System.Collections.Generic;
 
 namespace Project.Infra.Data.Repository
 {
-    public class ClienteRepository : SingletonBase<ClienteRepository>
+    public class ClienteRepository : IClienteRepository
     {
         public Cliente GetCliente(Guid id)
         {

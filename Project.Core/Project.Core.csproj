@@ -41,9 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base\SingletonBase.cs" />
     <Compile Include="Enum\TipoClienteEnum.cs" />
+    <Compile Include="Interface\IConnection.cs" />
     <Compile Include="Model\Cliente.cs" />
+    <Compile Include="Model\Endereco.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,22 +1,29 @@
-﻿using Project.Core.Base;
-using Project.Core.Model;
+﻿using Project.Core.Model;
+using Project.Domain.Interface;
+using Project.Infra.Data.Interface;
 using Project.Infra.Data.Repository;
 using System;
 using System.Collections.Generic;
 
 namespace Project.Domain.Services
 {
-    public class ClienteServices : SingletonBase<ClienteServices>
+    public class ClienteServices : IClienteServices
     {
+        IClienteRepository _clienteRepository;
+
+        public ClienteServices(IClienteRepository clienteRepository)
+        {
+            _clienteRepository = clienteRepository;
+        }
 
         public Cliente GetCliente(Guid id)
         {
-            return ClienteRepository.Instance().GetCliente(id);
+            return _clienteRepository.GetCliente(id);
         }
 
         public List<Cliente> GetClientes()
         {
-            return ClienteRepository.Instance().GetClientes();
+            return _clienteRepository.GetClientes();
         }
 
         public void InsertCliente(Cliente cliente)
@@ -24,12 +31,12 @@ namespace Project.Domain.Services
             //suponhamos que abaixo seja uma regra de negócio
             cliente.CPF.Replace('.', ' ').Replace('-', ' ');
 
-            ClienteRepository.Instance().InsertCliente(cliente);
+            _clienteRepository.InsertCliente(cliente);
         }
 
         public void DeleteCliente(Guid id)
         {
-            ClienteRepository.Instance().DeleteCliente(id);
+            _clienteRepository.DeleteCliente(id);
         }
     }
 }
